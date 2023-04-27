@@ -71,7 +71,8 @@ try:
             function_code = b'\x03'
             data_start_addr = b'\x00'
             data_Nos = b'\x00\x01'
-            data_send = machine_addr + function_code + data_start_addr + bytes.fromhex(i) + data_Nos
+            data_send = machine_addr + function_code + \
+                data_start_addr + bytes.fromhex(i) + data_Nos
 
             # print(data_send)
             crc16.update(data_send)
@@ -103,28 +104,28 @@ try:
             if command_dict[i] == "decimal_point":
                 dp1 = decimal_point[value1]
                 dp2 = decimal_point[value2]
-                #print(f"[-100~100Pa] {command_dict[i]}: {value1}, ({dp1})")
-                #print(f"[-1 ~ 1 kPa] {command_dict[i]}: {value2}, ({dp2})")
+                # print(f"[-100~100Pa] {command_dict[i]}: {value1}, ({dp1})")
+                # print(f"[-1 ~ 1 kPa] {command_dict[i]}: {value2}, ({dp2})")
 
             elif command_dict[i] == "pressure_unit":
                 pu1 = pressure_unit[value1]
                 pu2 = pressure_unit[value2]
-                #print(f"[-100~100Pa] {command_dict[i]}: {value1}, ({pu1})")
-                #print(f"[-1 ~ 1 kPa] {command_dict[i]}: {value2}, ({pu2})")
+                # print(f"[-100~100Pa] {command_dict[i]}: {value1}, ({pu1})")
+                # print(f"[-1 ~ 1 kPa] {command_dict[i]}: {value2}, ({pu2})")
 
             elif command_dict[i] == "measured output":
                 m_value1 = value1
                 m_value2 = value2
-                #print(f"[-100~100Pa] {command_dict[i]}: {value1}")
-                #print(f"[-1 ~ 1 kPa] {command_dict[i]}: {value2}")
+                # print(f"[-100~100Pa] {command_dict[i]}: {value1}")
+                # print(f"[-1 ~ 1 kPa] {command_dict[i]}: {value2}")
 
             else:
-                #print(f"[-100~100Pa] {command_dict[i]}: {value1}")
-                #print(f"[-1 ~ 1 kPa] {command_dict[i]}: {value2}")
+                # print(f"[-100~100Pa] {command_dict[i]}: {value1}")
+                # print(f"[-1 ~ 1 kPa] {command_dict[i]}: {value2}")
                 pass
 
-        #print(f"measured 1: {m_value1 * dp1} {pu1} ({m_value1}, {dp1})")
-        #print(f"measured 2: {m_value2 * dp2} {pu2} ({m_value2}, {dp2})")
+        # print(f"measured 1: {m_value1 * dp1} {pu1} ({m_value1}, {dp1})")
+        # print(f"measured 2: {m_value2 * dp2} {pu2} ({m_value2}, {dp2})")
 
         # save measured data with calculation
         m1 = f"{m_value1 * dp1: ,.0f}"
@@ -140,7 +141,8 @@ try:
             avg_m1 = sum(data_m1) / len(data_m1)
             avg_m2 = sum(data_m2) / len(data_m2)
             mdiff = avg_m1 - avg_m2
-            print(f"[{repeat}] M1: {avg_m1: ,.2f} Pa | M2: {avg_m2: ,.2f} Pa (Δ: {mdiff: ,.2f})")
+            print(
+                f"[{repeat}] M1: {avg_m1: ,.2f} Pa | M2: {avg_m2: ,.2f} Pa (Δ: {mdiff: ,.2f})")
             data_p.append(f"{timestamp},{avg_m1},{avg_m2}")
             data_m1 = []
             data_m2 = []
