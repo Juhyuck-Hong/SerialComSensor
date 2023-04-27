@@ -47,7 +47,8 @@ def freqShow(value):
     elif split_length == 2:
         return f"{int(value)} kHz"
     else:
-        return f"{int(value.replace(".", ""))} kHz"
+        value.replace(".", "")
+        return f"{int(value)} kHz"
 
 
 if __name__ == "__main__":
